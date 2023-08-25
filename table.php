@@ -1,3 +1,12 @@
+    <?php
+   
+    require_once 'includes/dbh.inc.php';
+    $query ="SELECT * FROM student";
+    $result = mysqli_query($conn,$query);
+    
+    
+    ?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +31,8 @@
   </head>
 
   <body class="m-0 font-sans text-base antialiased font-normal  leading-default bg-gray-50 text-slate-500">
+
+
     <div class="absolute w-full bg-blue-500  min-h-75"></div>
 
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl   max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
@@ -180,14 +191,19 @@
     <thead class="bg-gray-50">
       <tr>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900">Name</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Age</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Student_ID</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Grade</th>
+        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Class</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900">City</th>
-        <th scope="col" class="px-6 py-4 font-medium text-gray-900">Enrolled Courses</th>
         <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-100 border-t border-gray-100">
       <tr class="hover:bg-gray-50">
+        <?php 
+        while($row = mysqli_fetch_assoc($result)){
+
+        ?>
         <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
           <div class="relative h-10 w-10">
             <img
@@ -198,31 +214,22 @@
             
           </div>
           <div class="text-sm">
-            <div class="font-medium text-gray-700">Steven Jobs</div>
+            <div class="font-medium text-gray-700"><?php echo $row['iname']; ?></div>
             
           </div>
         </th>
-        <td class="px-6 py-4">21</td>
-        <td class="px-6 py-4">Ambalangoda</td>
+        <td class="px-6 py-4"><?php echo $row['sid']; ?></td>
+
+        <td class="px-6 py-4"><?php echo $row['grade']; ?></td>
+
+
         <td class="px-6 py-4">
-          <div class="flex gap-2">
-            <span
-              class="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-            >
-            IS11202
-            </span>
-            <span
-              class="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600"
-            >
-            IS11202
-            </span>
-            <span
-              class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600"
-            >
-            IS11202
-            </span>
-          </div>
+        <?php echo $row['class']; ?>
         </td>
+        <td>
+        <?php echo $row['city']; ?>
+        </td>
+
         <td class="px-6 py-4">
           <div class="flex justify-end gap-4">
             <a x-data="{ tooltip: 'Delete' }" href="#">
@@ -261,7 +268,11 @@
             </a>
           </div>
         </td>
+        
       </tr>
+      <?php
+        }
+        ?>
      
     </tbody>
   </table>

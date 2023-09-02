@@ -1,7 +1,9 @@
-
 <?php
-// Length of the password
-include_once './includes/functions.inc.php';
 
-sendEmail("lakshanmaduka24@gmail.com","lakshan");
+    $selectedValue = $_POST['mySelect'];
+    
+    // Do something with the selected value (e.g., save it to a database, process it, etc.)
+    
+    echo "Received selected value: " . $selectedValue;
+
 ?>

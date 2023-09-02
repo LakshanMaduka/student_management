@@ -1,12 +1,14 @@
 <?php
 include_once 'dbh.inc.php';
 
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'vendor/autoload.php';
+
 // identify empty login inputs
 function emptyInputsLogin($username,$pwd){
     $result;
@@ -62,6 +64,54 @@ exit();
 }
 }
 
+function studentExits($conn,$username){
+    $sql = "SELECT * FROM student WHERE email = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header('Location:../public/index.php?error =stmtfailed');
+        exit();
+    }
+   else{
+    echo " sucess";
+    mysqli_stmt_bind_param($stmt,"s",$username);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    if($row = mysqli_fetch_assoc($resultData)){
+        return $row;
+    }else{
+        return false;
+    }
+   
+   }
+   mysqli_stmt_close($stmt);
+}
+function loginStudent($conn,$username,$pwd){
+    $studentExit =  studentExits($conn,$username);
+    if($studentExit === false){
+        header("location: ./student_login.php?error=wronglogin");
+        exit();
+    }
+    
+    $pwdCheck = $studentExit['password'];
+    $checkPwd = password_verify($pwd,$pwdCheck);
+    
+    if($checkPwd === false){
+        echo $pwd;
+        echo $pwdCheck;
+        header('location: ./student_login.php?error='.$pwdCheck);
+        exit();
+    }
+    else if($checkPwd === true){
+   
+    $_SESSION["stuName"] = $studentExit['iname'];
+    $_SESSION["grade"] = $studentExit['grade'];
+    $_SESSION["class"] = $studentExit['class'];
+    
+    header("Location: student_main.php");
+    exit();
+    }
+    }
+
 function emptyStudentForm($fname,$iname,$email,$nic,$sid,$mobile,$address,$city,$province){
 $result;
 if(empty($fname)||empty($iname)||empty($email)||empty($nic)||empty($sid)||empty($mobile)||empty($address)||empty($city)||empty($province)){
@@ -107,7 +157,7 @@ return $password;
 }
 
 
-function sendEmail($email,$username, $password){
+function sendEmail($email,$username, $password,$emailApi){
    
   
 //Import PHPMailer classes into the global namespace
@@ -124,7 +174,7 @@ try {
     $mail->Host       = 'smtp.sendgrid.net';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'apikey';                     //SMTP username
-    $mail->Password   = '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';                               //SMTP password
+    $mail->Password   = $emailApi;                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -163,12 +213,17 @@ $sql = "INSERT INTO student (fname,iname,email,grade,sid,mobile,address,city,cla
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
     header("location:../student_form.php?error=stmtfaild");
+    $_SESSION['status_reg']  = "Can't Registerd!";
+ $_SESSION['state_code_reg']="error";
     exit();
 }else{
  mysqli_stmt_bind_param($stmt,"sssssisssss",$fname,$iname,$email,$grade,$sid,$mobile,$address,$city,$class,$password,$adminImage);
  mysqli_stmt_execute($stmt);
  mysqli_stmt_close($stmt);
- header("Location:../hotelResevation/sucsessRegStu.php");
+ $_SESSION['status_reg']  = "Successfully Registerd!";
+ $_SESSION['state_code_reg']="success";
+ 
+ header("Location:../hotelResevation/main.php");
  exit();
 }
 }
@@ -183,4 +238,8 @@ function retrieveData($conn){
         }
     } 
     return $row;
+}
+
+function updateStudent(){
+    
 }

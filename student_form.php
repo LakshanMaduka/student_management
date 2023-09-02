@@ -1,4 +1,4 @@
-
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,6 +16,7 @@
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" /> -->
         <link rel="stylesheet" href = "style.css">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="build/assets/js/sweetalert2.all.min.js"></script>
         <!-- Popper -->
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <!-- Main Styling -->
@@ -63,7 +64,7 @@
       
     </div>
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form action="register_student.inc.php" method = "post">
+      <form action="register_student.inc.php" method = "post" enctype="multipart/form-data">
       <div class="text-center flex justify-between">
         <h6 class="text-blueGray-700 text-xl font-bold">
           Add Student
@@ -189,5 +190,30 @@
 </div>
 
 </body>
+<?php 
+
+if(isset($_SESSION['status_reg'])&& $_SESSION['status_reg'] !='')
+{
+ 
+?>
+<script>
+
+  
+//     function checkdelete(){
+  
+   Swal.fire({
+ 
+  icon: <?php echo $_SESSION['state_code_reg']; ?>,
+  title: <?php echo $_SESSION['status_reg']; ?>,
+  showConfirmButton: false,
+  timer: 1500
+});
+   
+    </script>
+<?php
+
+  unset($_SESSION['status_reg']);
+}
+?>
 </html>
 

@@ -3,7 +3,7 @@
     require_once 'includes/dbh.inc.php';
     $query ="SELECT * FROM student";
     $result = mysqli_query($conn,$query);
-    
+    session_start();
     
     ?> 
 
@@ -24,6 +24,8 @@
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href = "style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="build/assets/js/sweetalert2.all.min.js"></script>
+    <script src="build/assets/js/jquery-3.7.0.all.min.js"></script>
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- Main Styling -->
@@ -80,7 +82,7 @@
                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
              </svg>
            </div>
-           <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Courses</span>
+           <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Classes</span>
          </a>
        </li>
 
@@ -206,11 +208,19 @@
         ?>
         <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
           <div class="relative h-10 w-10">
-            <img
-              class="h-full w-full rounded-full object-cover object-center"
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            <?php
+            if(isset($row['imgUrl'])){
+              $image_src = $row['imgUrl'];
+            }else{
+              $image_src = "public/images/Profile.png";
+            }
+            echo '<img
+            class="h-full w-full rounded-full object-cover object-center"
+            src= '.$image_src.'
+            alt=""
+          />';
+          
+            ?>
             
           </div>
           <div class="text-sm">
@@ -232,7 +242,8 @@
 
         <td class="px-6 py-4">
           <div class="flex justify-end gap-4">
-            <a x-data="{ tooltip: 'Delete' }" href="#">
+            <a x-data="{ tooltip: 'Delete' }" href="./student_remove.php?id=<?php echo $row['sid']; ?>" onclick = 'return checkdelete()' >
+            <input type='hidden' >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -249,7 +260,7 @@
                 />
               </svg>
             </a>
-            <a x-data="{ tooltip: 'Edite' }" href="#">
+            <a x-data="{ tooltip: 'Edite' }" href="./student_update_form.php?id=<?php echo $row['sid']; ?>" >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -281,9 +292,21 @@
         <!-- card 2 -->
 
 </main>
+
     
   </body>
   <script src="./build/assets/js/plugins/perfect-scrollbar.min.js" async></script>
   <!-- main script file  -->
   <script src="./build/assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+
+
+<script>
+
+function checkdelete() {
+  return confirm("Are you sure you want to delete this record?");
+}
+   
+    </script>
+
+  
 </html>

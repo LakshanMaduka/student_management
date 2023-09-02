@@ -1,3 +1,12 @@
+
+<?php
+   
+   require_once 'includes/dbh.inc.php';
+   $query ="SELECT * FROM classes";
+   $result = mysqli_query($conn,$query);
+  
+   
+   ?> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -70,7 +79,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Courses</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Classes</span>
             </a>
           </li>
    
@@ -143,132 +152,54 @@
 
             <div class="flex flex-wrap -mx-3  items-center justify-center">
                   <!-- card1 -->
-    <div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-3">
-        <div class="p-6">
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Courese Id:
-               </h5>
-               <h5 class="mb-2 block font-sans ml-10 text-gray-500 text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                IS11201
-               </h5>
-        
-          </div>
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Courese Name:
-               </h5>
-               <h5 class="mb-2 block font-sans ml-5 text-gray-500 text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                IT Auditing
-               </h5>
-        
-          </div>
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Teachers:
-               </h5>
-          </div>
-          <div class="flex flex-row justify-between">
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
-            </div>
-           
-          </div>
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
-            </div>
-           
-          </div>
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
+      <!-- <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 ">
+      <a href="./student_form.php">
+        <div class="relative flex flex-col  h-50 min-w-0 bg-green-500 hover:bg-white hover:text-emerald-500 hover:outline-emerald-800 shadow-xl  rounded-2xl bg-clip-border">
+        <div class="flex-auto p-4">
+          <div class="flex flex-row -mx-3 items-center justify-center">
+            <div class="flex-none w-2/3 max-w-full px-3 flex items-center justify-center">
+              <div>
+                <div class="mr-2 flex h-13 w-13 flex-row items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                
+                <h1 class="text-6xl"> 6</h1>
+                <p class="text-6xl">-</p>
+                <h1 class="text-6xl"> A</h1>
+                
+              </div>
             </div>
            
           </div>
         </div>
+      </div></a>
+    </div> -->
+    <!-- card1 -->
+    <?php 
+        while($row = mysqli_fetch_assoc($result)){
 
-     
-        </div>
-        <div class="p-6 pt-0">
-          <button
-            class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 "
-            type="button"
-            data-ripple-light="true"
-          >
-            Edit
-          </button>
-        </div>
-      </div>
-      <div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-3">
-        <div class="p-6">
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Courese Id:
-               </h5>
-               <h5 class="mb-2 block font-sans ml-10 text-gray-500 text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                IS11201
-               </h5>
-        
-          </div>
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Courese Name:
-               </h5>
-               <h5 class="mb-2 block font-sans ml-5 text-gray-500 text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                IT Auditing
-               </h5>
-        
-          </div>
-          <div class="flex flex-row">
-            <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                Teachers:
-               </h5>
-          </div>
-          <div class="flex flex-row justify-between">
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
-            </div>
-           
-          </div>
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
-            </div>
-           
-          </div>
-          <div class=" w-20 flex flex-col items-center justify-center p-3 border border-blue-500 rounded-2xl">
-            <img class="rounded-full w-9 h-9 " src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture">
-            <div class="space-y-0.5 font-medium text-center">
-                <div>Joseph McFall</div>
-            </div>
-           
-          </div>
-        </div>
+        ?>
+        <a href = "courese_form.php?grade=<?php echo $row['Grade']?>&class=<?php echo $row['Class_Name']?>">
+    <div class="h-40 mx-6 mx-6 w-80 bg-green-500 hover:bg-white hover:text-emerald-500 rounded-2xl flex flex-row -mx-3 items-center justify-center">
+    <div class="mr-2 flex h-13 w-13 flex-row items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                
+                <h1 class="text-6xl"> <?php echo $row['Grade']; ?></h1>
+                <p class="text-6xl">-</p>
+                <h1 class="text-6xl"> <?php echo $row['Class_Name']; ?></h1>
+                
+              </div>
 
+    </div>
+    </a>
+
+    <?php }  
+    
+    ?>
+   
+    
+    <!-- card1 -->
+ 
+        
      
-        </div>
-        <div class="p-6 pt-0">
-          <button
-            class="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 "
-            type="button"
-            data-ripple-light="true"
-          >
-            Edit
-          </button>
-        </div>
-      </div>
       
-      
-            </div>
-          </div>
           
     </main>
 

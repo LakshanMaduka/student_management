@@ -1,4 +1,17 @@
-<?php session_start() ?>
+<?php
+   
+   require_once 'includes/dbh.inc.php';
+   $query1 ="SELECT * FROM student";
+   $result1 = mysqli_query($conn,$query1);
+   $rowcount1 = mysqli_num_rows( $result1 );
+   ?> 
+   <?php
+   
+   require_once 'includes/dbh.inc.php';
+   $query2 ="SELECT * FROM teacher";
+   $result2 = mysqli_query($conn,$query2);
+   $rowcount2 = mysqli_num_rows( $result2 );
+   ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -71,7 +84,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
                 </svg>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Courses</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Classes</span>
             </a>
           </li>
 
@@ -170,6 +183,7 @@
           </div>
         </div>
       </nav>
+   
 
       <!-- end Navbar -->
 
@@ -192,7 +206,7 @@
                       </div>
                       <h5 class="mb-2 font-bold ">Students</h5>
                       <p class="mb-0   text-center" >
-                        5
+                      <?php echo $rowcount1?>
                       </p>
                     </div>
                   </div>
@@ -204,29 +218,7 @@
 
           <!-- card2 -->
  
-          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-            <div class="relative flex flex-col  h-50 min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <div class="flex flex-row -mx-3 items-center justify-center">
-                  <div class="flex-none w-2/3 max-w-full px-3 flex items-center justify-center">
-                    <div>
-                      <div class="mr-2 flex h-13 w-13 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                
-                         <svg class=" fill-none text-red-500" fill = "none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
-                        </svg>
-                      </div>
-                      <h5 class="mb-2 font-bold ">Teachers</h5>
-                      <p class=" text-center mb-0" >
-                        5
-                      </p>
-                    </div>
-                  </div>
-                 
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <!-- card3 -->
           <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
             <div class="relative flex flex-col  h-50 min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
@@ -242,7 +234,7 @@
                       </div>
                       <h5 class="mb-2 font-bold ">Teachers</h5>
                       <p class="  text-center mb-0" >
-                        5
+                        <?php echo $rowcount2?>
                       </p>
                     </div>
                   </div>
@@ -298,20 +290,20 @@
    
              
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-              <a href="./courese_form.php">
+              <a href="./courses.php">
                 <div class="relative flex flex-col  h-50 min-w-0  bg-red-500 hover:bg-white shadow-xl  rounded-2xl bg-clip-border">
                   <div class="flex-auto p-4">
                     <div class="flex flex-row -mx-3 items-center justify-center">
                       <div class="flex-none w-2/3 max-w-full px-3 flex items-center justify-center">
                         <div>
-                          <div class="mr-2 flex h-13 w-13 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                          <div class="mr-2 flex h-20 w-20 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                     
                             
                             <svg fill="none" stroke="currentColor" class="text-red-900 fill-none" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"></path>
                             </svg>
                           </div>
-                          <h5 class="mb-2 font-bold text-red-900">Add Course</h5>
+                          <h5 class="mb-2 font-bold text-red-900 flex justify-center items-center">Assign Works</h5>
                           
                         </div>
                       </div>
@@ -355,5 +347,6 @@
   <script src="./build/assets/js/plugins/perfect-scrollbar.min.js" async></script>
   <!-- main script file  -->
   <script src="./build/assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+
 </html>
 

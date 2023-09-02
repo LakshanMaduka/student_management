@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -61,49 +62,58 @@
     <div class="rounded-tl-2xl rounded-tr-2xl  mb-0 px-6 py-6">
       <div class="text-center flex justify-between">
         <h6 class="text-blueGray-700 text-xl font-bold">
-          Add course
+        Assign Works
         </h6>
-        <button class="bg-blue-500 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-          Save
-        </button>
+       
       </div>
     </div>
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form>
+      <form action = "assign_works.inc.php" method = "post">
+      <button name= "submit" type="submit" onclick= 'return checkDelete();' class=" flex justify-end  bg-blue-500 text-white active:bg-sky-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+          Submit
+        </button>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Course Information
+          Assign Works
         </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Course Title
+                Subject
               </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+              <input type="text" name="subject" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Course Id
+                Grade
               </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+              <input type="text" name="grade" value="<?php echo $_GET['grade'] ?>" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Duration
+                Class
               </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+              <input type="text" name="class" value="<?php echo $_GET['class'] ?>" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Teacher Id
+                Work
               </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+              <input type="text" name="works" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                due date
+              </label>
+              <input type="text" name="lastdate" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
             </div>
           </div>
         </div>
@@ -125,4 +135,11 @@
 </div>
 
 </body>
+<script>
+
+function checkdelete() {
+  return alert("Successfully add the work?");
+}
+   
+    </script>
 </html>
